@@ -1,0 +1,56 @@
+org: utecps
+service: api-leads
+
+provider:
+  name: aws
+  runtime: python3.13
+  memorySize: 1024
+  timeout: 20
+  iam:
+    role: arn:aws:iam::654654516540:role/LabRole
+
+functions:
+  listarLeads:
+    handler: ListarLeads.lambda_handler
+    events:
+      - http:
+          path: /leads/listar
+          method: get
+          cors: true
+          integration: lambda
+
+  buscarLead:
+    handler: BuscarLead.lambda_handler
+    events:
+      - http:
+          path: /leads/buscar
+          method: post
+          cors: true
+          integration: lambda
+
+  crearLead:
+    handler: CrearLead.lambda_handler
+    events:
+      - http:
+          path: /leads/crear
+          method: post
+          cors: true
+          integration: lambda
+
+  modificarLead:
+    handler: ModificarLead.lambda_handler
+    events:
+      - http:
+          path: /leads/modificar
+          method: put
+          cors: true
+          integration: lambda
+
+  eliminarLead:
+    handler: EliminarLead.lambda_handler
+    events:
+      - http:
+          path: /leads/eliminar
+          method: delete
+          cors: true
+          integration: lambda
